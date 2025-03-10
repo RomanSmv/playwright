@@ -10,12 +10,21 @@ test('Elments Text Box is working', async ({ page }) => {
 
     const sidebarPage = new SidebarPage(page)
 
-    await sidebarPage.clickOnMenuItem('Elements')
-    await sidebarPage.clickOnMenuItem('Elements')
+    // await sidebarPage.clickOnMenuItem('Elements')
+    // await sidebarPage.clickOnMenuItem('Elements')
+
+    await sidebarPage.clickOnSubMenuItem('item-0', 'Text Box')
+
+     
+        await expect(page.locator('input[placeholder="Full Name"]')).toBeVisible();
+        await expect(page.locator('input[placeholder="name@example.com"]')).toBeVisible();
+        await expect(page.locator('textarea[placeholder="Current Address"]')).toBeVisible();
+        await expect(page.locator('#permanentAddress')).toBeVisible(); // Permanent Address
+        await expect(page.locator('text=Submit')).toBeVisible();
 
 
-    await page.locator('Text Box')
-  
+     
+      
 
   
     // const urlLink = 'https://sun9-31.userapi.com/impf/3KDHLrHaWaKR8OzUBUTr5le066FDI3TbQCWOmA/-1ATzzBYbxs.jpg?size=1590x400&quality=95&crop=0,0,1590,400&sign=23f5194c033e03837ba86ad920678d53&type=cover_group'

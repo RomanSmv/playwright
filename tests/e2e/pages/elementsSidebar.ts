@@ -9,11 +9,14 @@ export class SidebarPage {
     this.menu = page.locator('.accordion'); // Sidebar container that holds menu items
   }
 
-  async clickOnMenuItem(itemText: string, nameClass?: string ,) {
-    await this.menu.locator('span.text', { hasText: itemText, : nameClass }){
-        constructor(parameters) {
-            
-        }
-    } }).click();
+  async clickOnMenuItem(itemText: string) {
+    await this.menu.locator('div.header-text', { hasText: itemText }).click();
+  }
+  
+  async clickOnSubMenuItem(id: string, itemText: string) {
+    const menuItem = this.menu.locator(`li#${id}`, {hasText: itemText})
+    await menuItem.click();
   }
 }
+
+  
