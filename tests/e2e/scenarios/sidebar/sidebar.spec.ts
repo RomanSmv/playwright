@@ -11,23 +11,27 @@ test('Elments Text Box is working', async ({ page }) => {
     const sidebarPage = new SidebarPage(page)
 
     // await sidebarPage.clickOnMenuItem('Elements')
-    // await sidebarPage.clickOnMenuItem('Elements')
 
     await sidebarPage.clickOnSubMenuItem('item-0', 'Text Box')
 
-     
+        //check forms is visible
         await expect(page.locator('input[placeholder="Full Name"]')).toBeVisible();
         await expect(page.locator('input[placeholder="name@example.com"]')).toBeVisible();
         await expect(page.locator('textarea[placeholder="Current Address"]')).toBeVisible();
-        await expect(page.locator('#permanentAddress')).toBeVisible(); // Permanent Address
+        await expect(page.locator('#permanentAddress')).toBeVisible(); 
         await expect(page.locator('text=Submit')).toBeVisible();
 
+        // check form completion
+        await page.fill('input[placeholder="Full Name"]', 'John Doe');
+        await page.fill('input[placeholder="name@example.com"]', 'john.doe@example.com');
+        await page.fill('textarea[placeholder="Current Address"]', '123 Main St');
+        await page.fill('#permanentAddress', '456 Secondary St');
 
-     
-      
+        // check form on submit
+        await page.locator('text=Submit').click()
 
-  
-    // const urlLink = 'https://sun9-31.userapi.com/impf/3KDHLrHaWaKR8OzUBUTr5le066FDI3TbQCWOmA/-1ATzzBYbxs.jpg?size=1590x400&quality=95&crop=0,0,1590,400&sign=23f5194c033e03837ba86ad920678d53&type=cover_group'
-  
-    // await expect(img).toHaveAttribute('src', urlLink)
+        await page.waitForSelector('#output')
+        
+        const outputForm = await page.locator('#output');
+        await expect(outputForm.locator('#name')).toContainText('John Doe');
   });
